@@ -1,0 +1,8 @@
+torch
+torch-geometric
+transformers
+scikit-learn
+Pillow
+networkx
+matplotlib
+torchvision

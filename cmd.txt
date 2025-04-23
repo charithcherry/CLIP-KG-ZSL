@@ -1,0 +1,9 @@
+python -m venv venv  
+venv/Scripts/activate
+pip install -r requirements.txt
+python create_graph.py
+python train_rgcn.py data/Animals_with_Attributes2/JPEGImages output/filtered_class_pairwise_weighted_graph.json output/
+python test_module/rgcn_test.py --image_path data/Animals_with_Attributes2/JPEGImages/chimpanzee/chimpanzee_10501.jpg
+python utils/generate_clip_embeddings.py data/Animals_with_Attributes2/JPEGImages/
+python train_mlp.py class_wise_embeddings/train-image-embeddings-350 output/
+python test_module/test_mlp.py /checkpoints/final_model.pt /output/reordered_prototypes.pt data/Animals_with_Attributes2/JPEGImages/chimpanzee/chimpanzee_10501.jpg

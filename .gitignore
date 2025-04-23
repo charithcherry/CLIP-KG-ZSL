@@ -1,0 +1,8 @@
+__pycache__
+checkpoints/
+class_wise_embeddings/
+data/
+**/__pycache__/
+**/**/__pycache__/
+output/
+venv/
