@@ -15,7 +15,6 @@ clip_requirement.test_clip_installation()
 
 def load_graph(graph_path):
     """Load the pre-generated graph from the specified file."""
-    # Assuming graph is in JSON format
     with open(graph_path, 'r') as f:
         graph_data = json.load(f)
     return graph_data
@@ -28,7 +27,7 @@ def get_target_similarity_matrix_from_graph(edges, class_to_idx, num_classes, ep
     num_classes: total number of classes
     epsilon: small value to avoid division by zero
     """
-    sim_matrix = torch.eye(num_classes)  # Start with identity (max sim with self)
+    sim_matrix = torch.eye(num_classes)  
 
     for edge in edges:
         src = class_to_idx[edge['source']]

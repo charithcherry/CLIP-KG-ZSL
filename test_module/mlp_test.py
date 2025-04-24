@@ -6,11 +6,10 @@ import torch
 import torch.nn.functional as F
 import argparse
 from models.mlp.mlp import EmbedProjector
-from utils.image_embedding_utils import get_image_embedding  # you must define this
+from utils.image_embedding_utils import get_image_embedding  
 from test_requirements.clip_requirement import test_clip_installation
 
 
-# Check CLIP installation
 test_clip_installation()
 
 

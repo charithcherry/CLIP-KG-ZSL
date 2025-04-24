@@ -6,8 +6,8 @@ import torch
 from models.rgcn.rgcn import KnowledgeGraphRGCN
 from test_requirements import clip_requirement
 from graph.graph_generator import GraphGenerator
-from train_rgcn import create_triples_from_graph, get_target_similarity_matrix_from_graph, load_graph  # Adjust import name if needed
-from utils.image_embedding_utils import get_image_embedding  # Make sure this file exists
+from train_rgcn import create_triples_from_graph, get_target_similarity_matrix_from_graph, load_graph  
+from utils.image_embedding_utils import get_image_embedding  
 
 import argparse
 
