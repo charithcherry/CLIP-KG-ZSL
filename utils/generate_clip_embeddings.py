@@ -14,7 +14,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-from dataloaders.train_loader import SingleClassDataset
+from dataloaders.data_loader import SingleClassDataset
 from test_requirements.clip_requirement import test_clip_installation
 
 test_clip_installation()

@@ -6,3 +6,4 @@ Pillow
 networkx
 matplotlib
 torchvision
+argsparse

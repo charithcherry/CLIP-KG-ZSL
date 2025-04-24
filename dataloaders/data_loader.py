@@ -7,7 +7,7 @@ from torchvision import transforms
 import torch.nn.functional as F
 
 class SingleClassDataset(Dataset):
-    def __init__(self, root_dir, class_name, max_samples=250):
+    def __init__(self, root_dir, class_name, max_samples=350):
         self.samples = []
         class_dir = os.path.join(root_dir, class_name)
         images = [
@@ -20,7 +20,7 @@ class SingleClassDataset(Dataset):
         self.class_name = class_name
 
     def __len__(self):
-        return 250
+        return 350
 
     def __getitem__(self, idx):
         if idx < len(self.originals):

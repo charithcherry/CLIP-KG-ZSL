@@ -39,7 +39,7 @@ for class_name in seen_classes:
 X_seen = torch.cat(all_embeddings, dim=0)
 y_seen = torch.tensor(all_labels)
 
-print("✅ Loaded embeddings and labels")
+print("Loaded embeddings and labels")
 print("X_seen shape:", X_seen.shape)
 
 # === Generate Soft Similarity Labels ===
