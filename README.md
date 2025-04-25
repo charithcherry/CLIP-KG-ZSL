@@ -117,6 +117,36 @@ python inference/inference_pipeline.py \
   --prototype_path output/reordered_prototypes.pt \
   --embedding_dir data/image-embeddings-2.0/test-image-embeddings-20
 ```
+---
+## 📊 Evaluation Metrics
+
+To assess the performance of our zero-shot classification system, we compute the following metrics:
+
+### 🔹 Top-1 Accuracy
+- **Definition:** The fraction of test samples where the top predicted class matches the ground truth label.
+- **Interpretation:** Measures direct classification performance without accounting for semantic similarity.
+
+### 🔹 Adjusted Accuracy (Top-2 + Semantic Match)
+- **Definition:** Considers a prediction correct if:
+  - The top-1 prediction is correct, **OR**
+  - The second-best prediction is correct, **OR**
+  - The predicted class belongs to the same semantic group as the true class.
+- **Interpretation:** Provides a more relaxed and human-aligned metric, recognizing cases where semantically related predictions are acceptable (e.g., predicting “zebra” instead of “horse”).
+
+### 🔹 Macro Precision
+- **Definition:** Precision computed independently for each class and averaged.
+- **Interpretation:** Ensures equal weight is given to all classes regardless of sample imbalance.
+
+### 🔹 Macro Recall
+- **Definition:** Recall computed independently for each class and averaged.
+- **Interpretation:** Captures how well the model identifies each class overall.
+
+### 🔹 Macro F1 Score
+- **Definition:** Harmonic mean of macro precision and macro recall.
+- **Interpretation:** Balances precision and recall at a class-averaged level, providing a single performance summary.
+
+
+---
 
 
 
