@@ -34,6 +34,33 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 ---
+---
+## 📁 Project Structure
+```
+.
+├── create_graph.py
+├── train_rgcn.py
+├── train_mlp.py
+├── Dataloader/
+│   └── dataloader.py
+├── inference/
+│   └── inference_pipeline.py
+├── utils/
+│   ├── generate_clip_embeddings.py
+│   └── image_embedding_utils.py
+├── test_module/
+│   ├── rgcn_test.py
+│   └── mlp_test.py
+├── data/
+│   └── Animals_with_Attributes2/
+├── class_wise_embeddings/
+├── test_requirements/
+│   └── clip_requirement.py
+├── checkpoints/
+├── output/
+└── requirements.txt
+```
+---
 ## 🚀 Running the Pipeline
 
 ### 🔹 Step 1: Create the Class Relationship Graph
@@ -90,32 +117,7 @@ python inference/inference_pipeline.py \
   --prototype_path output/reordered_prototypes.pt \
   --embedding_dir data/image-embeddings-2.0/test-image-embeddings-20
 ```
----
-## 📁 Project Structure
-```
-.
-├── create_graph.py
-├── train_rgcn.py
-├── train_mlp.py
-├── Dataloader/
-│   └── dataloader.py
-├── inference/
-│   └── inference_pipeline.py
-├── utils/
-│   ├── generate_clip_embeddings.py
-│   └── image_embedding_utils.py
-├── test_module/
-│   ├── rgcn_test.py
-│   └── mlp_test.py
-├── data/
-│   └── Animals_with_Attributes2/
-├── class_wise_embeddings/
-├── test_requirements/
-│   └── clip_requirement.py
-├── checkpoints/
-├── output/
-└── requirements.txt
-```
+
 
 
 
