@@ -18,6 +18,28 @@ Our goal is to develop a zero-shot classification system that leverages:
 
 ---
 
+## Concepts
+### KnowledgeGraphRGCN
+
+The **KnowledgeGraphRGCN** model integrates **Relational Graph Convolutional Networks (R-GCNs)** with **CLIP embeddings** for zero-shot image classification. It utilizes a knowledge graph of class relationships and CLIP-generated text embeddings to refine class representations through the R-GCN, enabling the model to classify unseen classes.
+
+#### Key Components:
+1. **R-GCN**: Refines class embeddings by considering relational information in a graph of classes and their relationships.
+2. **CLIP Embeddings**: Uses CLIP to generate shared text and image embeddings for semantic understanding across modalities.
+3. **Knowledge Graph**: Built from triples (subject, object, relationship) to represent class relationships, which guide the R-GCN.
+4. **Training Objective**: Aligns R-GCN-learned embeddings with original CLIP embeddings using cosine similarity.
+
+This model can classify images based on unseen classes by leveraging the knowledge graph and CLIP's multimodal embeddings.
+
+### PrototypeRefinementLoss
+The `PrototypeRefinementLoss` combines **alignment** and **separation** objectives to refine class prototypes:
+1. **Alignment Loss**: Uses **cosine similarity** between the refined and original prototypes to encourage alignment, ensuring that the refined prototypes stay close to the original ones in the learned feature space.
+2. **Separation Loss**: Uses **MSE loss** on the cosine similarity matrix of the refined prototypes, ensuring that distinct classes remain far apart. The separation is guided by a **target similarity matrix**, which provides explicit class relationship information.
+#### **Why It's Unique**
+This loss is unique because it combines **cosine similarity** for alignment with **MSE loss** for separation, while using a **target similarity matrix** to guide the separation. While similar concepts exist in zero-shot learning and metric learning, this specific combination of techniques for refining prototypes is relatively novel, especially with the added semantic guidance from the target similarity matrix.
+
+---
+
 ## ⚙️ Installation
 
 ```bash
