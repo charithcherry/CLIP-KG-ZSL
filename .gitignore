@@ -7,3 +7,4 @@ data/
 output/
 venv/
 checkpoints_rgcn_mlp/
+checkpoints_gcn_mlp/
