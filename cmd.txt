@@ -8,3 +8,4 @@ python utils/generate_clip_embeddings.py data/Animals_with_Attributes2/JPEGImage
 python train_mlp.py class_wise_embeddings/train-image-embeddings-350 output/
 python test_module/mlp_test.py checkpoints/final_model.pt output/reordered_prototypes.pt data/Animals_with_Attributes2/JPEGImages/chimpanzee/chimpanzee_10501.jpg
 python inference/inference_pipeline.py --checkpoint_path checkpoints/final_model.pt --prototype_path output/reordered_prototypes.pt --embedding_dir data/image-embeddings-2.0/test-image-embeddings-20
+python generate_clip_prototypes.py
