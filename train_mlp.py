@@ -20,7 +20,7 @@ seen_classes = ["horse", "cow", "deer", "gorilla", "blue+whale"]
 
 # === Load prototype matrix ===
 print("Loading Prototypes")
-prototype_file = os.path.join(output_path, "reordered_prototypes.pt")
+prototype_file =  os.path.join(output_path, "gcn_prototypes.pt") # os.path.join(output_path, "reordered_prototypes.pt") rgcn prototypes 
 prototypes = torch.load(prototype_file)
 prototype_matrix = torch.stack([prototypes[i] for i in range(10)])  # shape: [10, D]
 
