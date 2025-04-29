@@ -6,3 +6,4 @@ data/
 **/**/__pycache__/
 output/
 venv/
+checkpoints_rgcn_mlp/
