@@ -5,7 +5,6 @@ import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader
 from models.mlp.mlp import EmbedProjector
 
-# === Argparse for dynamic paths ===
 parser = argparse.ArgumentParser()
 parser.add_argument('save_dir', type=str, help='Path to directory containing embedding .pt files')
 parser.add_argument('output_path', type=str, help='Path to directory containing prototype_matrix.pt')
@@ -18,13 +17,11 @@ os.makedirs(checkpoint_dir, exist_ok=True)
 
 seen_classes = ["horse", "cow", "deer", "gorilla", "blue+whale"]
 
-# === Load prototype matrix ===
 print("Loading Prototypes")
 prototype_file =  os.path.join(output_path, "gcn_prototypes.pt") # os.path.join(output_path, "reordered_prototypes.pt") rgcn prototypes 
 prototypes = torch.load(prototype_file)
 prototype_matrix = torch.stack([prototypes[i] for i in range(10)])  # shape: [10, D]
 
-# === Load Embeddings ===
 all_embeddings = []
 all_labels = []
 label_to_id = {name: idx for idx, name in enumerate(seen_classes)}
@@ -42,7 +39,6 @@ y_seen = torch.tensor(all_labels)
 print("Loaded embeddings and labels")
 print("X_seen shape:", X_seen.shape)
 
-# === Generate Soft Similarity Labels ===
 with torch.no_grad():
     X_seen_norm = F.normalize(X_seen, dim=1)
     proto_norm = F.normalize(prototype_matrix, dim=1)
@@ -51,7 +47,6 @@ with torch.no_grad():
 dataset = TensorDataset(X_seen, full_similarity_targets)
 loader = DataLoader(dataset, batch_size=64, shuffle=True)
 
-# === Model + Training ===
 model = EmbedProjector()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
@@ -85,7 +80,6 @@ for epoch in range(10):
 
     print(f"Saved checkpoint to {checkpoint_path}")
 
-# === Save final model after training ===
 final_model_path = os.path.join(checkpoint_dir, "final_model.pt")
 torch.save({
     "model_state_dict": model.state_dict(),
