@@ -18,6 +18,28 @@ Our goal is to develop a zero-shot classification system that leverages:
 
 ---
 
+## Concepts
+### KnowledgeGraphRGCN
+
+The **KnowledgeGraphRGCN** model integrates **Relational Graph Convolutional Networks (R-GCNs)** with **CLIP embeddings** for zero-shot image classification. It utilizes a knowledge graph of class relationships and CLIP-generated text embeddings to refine class representations through the R-GCN, enabling the model to classify unseen classes.
+
+#### Key Components:
+1. **R-GCN**: Refines class embeddings by considering relational information in a graph of classes and their relationships.
+2. **CLIP Embeddings**: Uses CLIP to generate shared text and image embeddings for semantic understanding across modalities.
+3. **Knowledge Graph**: Built from triples (subject, object, relationship) to represent class relationships, which guide the R-GCN.
+4. **Training Objective**: Aligns R-GCN-learned embeddings with original CLIP embeddings using cosine similarity.
+
+This model can classify images based on unseen classes by leveraging the knowledge graph and CLIP's multimodal embeddings.
+
+### PrototypeRefinementLoss
+The `PrototypeRefinementLoss` combines **alignment** and **separation** objectives to refine class prototypes:
+1. **Alignment Loss**: Uses **cosine similarity** between the refined and original prototypes to encourage alignment, ensuring that the refined prototypes stay close to the original ones in the learned feature space.
+2. **Separation Loss**: Uses **MSE loss** on the cosine similarity matrix of the refined prototypes, ensuring that distinct classes remain far apart. The separation is guided by a **target similarity matrix**, which provides explicit class relationship information.
+#### **Why It's Unique**
+This loss is unique because it combines **cosine similarity** for alignment with **MSE loss** for separation, while using a **target similarity matrix** to guide the separation. While similar concepts exist in zero-shot learning and metric learning, this specific combination of techniques for refining prototypes is relatively novel, especially with the added semantic guidance from the target similarity matrix.
+
+---
+
 ## ⚙️ Installation
 
 ```bash
@@ -117,6 +139,36 @@ python inference/inference_pipeline.py \
   --prototype_path output/reordered_prototypes.pt \
   --embedding_dir data/image-embeddings-2.0/test-image-embeddings-20
 ```
+---
+## 📊 Evaluation Metrics
+
+To assess the performance of our zero-shot classification system, we compute the following metrics:
+
+### 🔹 Top-1 Accuracy
+- **Definition:** The fraction of test samples where the top predicted class matches the ground truth label.
+- **Interpretation:** Measures direct classification performance without accounting for semantic similarity.
+
+### 🔹 Adjusted Accuracy (Top-2 + Semantic Match)
+- **Definition:** Considers a prediction correct if:
+  - The top-1 prediction is correct, **OR**
+  - The second-best prediction is correct, **OR**
+  - The predicted class belongs to the same semantic group as the true class.
+- **Interpretation:** Provides a more relaxed and human-aligned metric, recognizing cases where semantically related predictions are acceptable (e.g., predicting “zebra” instead of “horse”).
+
+### 🔹 Macro Precision
+- **Definition:** Precision computed independently for each class and averaged.
+- **Interpretation:** Ensures equal weight is given to all classes regardless of sample imbalance.
+
+### 🔹 Macro Recall
+- **Definition:** Recall computed independently for each class and averaged.
+- **Interpretation:** Captures how well the model identifies each class overall.
+
+### 🔹 Macro F1 Score
+- **Definition:** Harmonic mean of macro precision and macro recall.
+- **Interpretation:** Balances precision and recall at a class-averaged level, providing a single performance summary.
+
+
+---
 
 
 
